@@ -1,0 +1,13 @@
+﻿Copyright (c) 2025 Charles Mallah
+
+All rights and copyrights remain reserved to the copyright author(s) and owner.
+This applies to all code, object code, images, audio and music, documentation;
+in other words all content packaged herein with this notice, and all future
+official patches and updates.
+
+This software is provided 'as-is', without any express or implied warranty.
+
+In no event will the author(s) be held liable for any damages arising from the
+use of this software.
+
+The software is released under the MIT License.
