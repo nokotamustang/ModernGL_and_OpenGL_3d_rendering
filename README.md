@@ -228,7 +228,7 @@ In modern development more advanced searching is performed to improve the step n
 ![Screenshots](./screenshots/mgl_disp_3.png)
 _Top: At a sharp angle the render of the parallax mapping looks impressive even with a deep displacement. Middle: It combines nicely with the illumination and shadow casting, however not without artifacts and stepping. Bottom: The left has the flat surface, then the bump mapped one, and to the right is with both parallax and bump mapping with textures off and just illumination on._
 
-A note on normal map formats since there are two different ones: the depth and the height ones.
+<!-- A note on normal map formats since there are two different ones: the depth and the height ones.
 
 In the `/tools/invert_displacement.py` script you can invert the height component of the image, since some sources will have height as depths and causes more math in the frag.
 
@@ -236,7 +236,7 @@ A usage example from the tools folder is:
 ```BAT
 pip install Pillow numpy
 python invert_displacement.py --input ../textures/stone_brick_wall_disp.png --output ../textures/stone_brick_wall_disp.png
-```
+``` -->
 
 Reading:
 
