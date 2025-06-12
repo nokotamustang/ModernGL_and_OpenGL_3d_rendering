@@ -227,7 +227,7 @@ In modern development more advanced searching is performed to improve the step n
 ![Screenshots](./screenshots/mgl_disp_1.png)
 ![Screenshots](./screenshots/mgl_disp_2.png)
 ![Screenshots](./screenshots/mgl_disp_3.png)
-_The left has the flat surface, then the bump mapped one, and to the right is with both parallax and bump mapping._
+_Top: At a sharp angle the render of the parallax mapping looks impressive even with a deep displacement. Middle: It combines nicely with the illumination and shadow casting, however not without artifacts and stepping. Bottom: The left has the flat surface, then the bump mapped one, and to the right is with both parallax and bump mapping with textures off and just illumination on._
 
 A note on normal map formats since there are two different ones: the depth and the height ones.
 
