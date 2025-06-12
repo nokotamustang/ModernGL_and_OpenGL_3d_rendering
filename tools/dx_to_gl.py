@@ -6,11 +6,41 @@ import argparse
 # Simple command line app to convert DX normal map to GL normal map (inverted y-component)
 # Despite the naming used, this could be used to convert from GL to DX too
 
+modes = {
+    1: "1-bit pixels, black and white, stored with one pixel per byte",
+    "L": "8-bit pixels, grayscale",
+    "P": "8-bit pixels, mapped to any other mode using a color palette",
+    "RGB": "3x8-bit pixels, true color",
+    "RGBA": "4x8-bit pixels, true color with transparency mask",
+    "CMYK": "4x8-bit pixels, color separation",
+    "YCbCr": "3x8-bit pixels, color video format",
+    "LAB": "3x8-bit pixels, the L*a*b color space",
+    "HSV": "3x8-bit pixels, Hue, Saturation, Value color space",
+    "I": "32-bit signed integer pixels",
+    "F": "32-bit floating point pixels"
+}
+
 
 def convert_dx_to_gl_normal_map(input_path, output_path):
-    # Load the PNG image
     try:
         in_image = Image.open(input_path)
+
+        print(f"image        : {in_image.filename}")
+        print(f"mode         : {in_image.mode}")
+        print(f"as           : {modes[in_image.mode]}")
+        print(f"format       : {in_image.format}")
+        print(f"size         : {in_image.size}")
+        print(f"width        : {in_image.width}")
+        print(f"height       : {in_image.height}")
+        print(f"bands        : {in_image.getbands()}")
+        print(f"palette      : {in_image.palette}")
+        print(f"info         : {in_image.info}")
+        print(f"transparency : {in_image.has_transparency_data}")
+
+        if output_path == None:
+            print("no output file, done")
+            return
+
         if in_image.mode != 'RGB' and in_image.mode != 'RGBA':
             raise ValueError(f"input image must be in RGB or RGBA format, is: {in_image.mode}")
     except Exception as e:
@@ -21,7 +51,7 @@ def convert_dx_to_gl_normal_map(input_path, output_path):
     image_array = np.array(in_image, dtype=np.uint8)
 
     # Invert the green channel (index 1) for DirectX to OpenGL conversion
-    image_array[:, :, 1] = 255 - image_array[:, :, 1]
+    image_array[:, :, 1] = np.uint8 - image_array[:, :, 1]
 
     # Convert back to PIL image
     if in_image.mode == 'RGB':
@@ -48,7 +78,7 @@ def main():
 
     # Default
     input_path = "../textures/brick_bump_dx.png"
-    output_path = "../textures/brick_bump_gl.png"
+    output_path = None
     if args.input:
         input_path = args.input
     if args.output:
