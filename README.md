@@ -214,7 +214,6 @@ Reading:
 
 - OpenGL tutorial on normal mapping: <https://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/>.
 - LearnOpenGL on normal mapping: <https://learnopengl.com/Advanced-Lighting/Normal-Mapping>.
-- PolyHaven for textures: <https://polyhaven.com/textures/wood>.
 
 #### py_2.c_displacement_maps - Displacement mapping
 

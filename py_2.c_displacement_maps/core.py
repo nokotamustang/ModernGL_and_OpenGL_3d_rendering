@@ -731,25 +731,10 @@ class Scene():
 
         # Add cubes
         _g = 1.5
-        self.objects.append(Cube(app, position=(-_g*6, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7))
-        self.objects.append(Cube(app, position=(-_g*5, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_normal"))
-        self.objects.append(Cube(app, position=(-_g*4, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_normal",
+        self.objects.append(Cube(app, position=(-_g*2, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7))
+        self.objects.append(Cube(app, position=(-_g, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_normal"))
+        self.objects.append(Cube(app, position=(0, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_normal",
                                  parallax="toy_box_disp"))
-
-        self.objects.append(Cube(app, position=(-_g*3, 0, 0), texture="bark_willow_diff", roughness=0.5, metallic=0.7))
-        self.objects.append(Cube(app, position=(-_g*2, 0, 0), texture="bark_willow_diff", roughness=0.5, metallic=0.7, bump="bark_willow_nor_gl"))
-        self.objects.append(Cube(app, position=(-_g, 0, 0), texture="bark_willow_diff", roughness=0.5, metallic=0.7, bump="bark_willow_nor_gl",
-                                 parallax="bark_willow_disp"))
-
-        self.objects.append(Cube(app, position=(0, 0, 0), texture="red_brick_diff", roughness=0.6, metallic=0.6))
-        self.objects.append(Cube(app, position=(_g, 0, 0), texture="red_brick_diff", roughness=0.6, metallic=0.6, bump="red_brick_nor_gl"))
-        self.objects.append(Cube(app, position=(_g*2, 0, 0), texture="red_brick_diff", roughness=0.6, metallic=0.6,
-                                 bump="red_brick_nor_gl", parallax="red_brick_disp"))
-
-        self.objects.append(Cube(app, position=(_g*3, 0, 0), texture="stone_brick_wall_diff", roughness=0.6, metallic=0.6))
-        self.objects.append(Cube(app, position=(_g*4, 0, 0), texture="stone_brick_wall_diff", roughness=0.6, metallic=0.6, bump="stone_brick_wall_nor_gl"))
-        self.objects.append(Cube(app, position=(_g*5, 0, 0), texture="stone_brick_wall_diff", roughness=0.6, metallic=0.6,
-                                 bump="stone_brick_wall_nor_gl", parallax="stone_brick_wall_disp"))
 
         # Debug lights
         self.light_source_global = LightSource(app, light_source=self.app.global_light)
