@@ -10,14 +10,14 @@ def invert_displacement_map(input_path, output_path):
     # Load the PNG image
     try:
         in_image = Image.open(input_path)
-        if in_image.mode != 'RGB' and in_image.mode != 'I;16':
-            raise ValueError(f"input image must be in RGB or I;16 format, is: {in_image.mode}")
+        if in_image.mode != 'RGB' and in_image.mode != 'I;16' and in_image.mode != 'L':
+            raise ValueError(f"input image must be in RGB or I;16 or L format, is: {in_image.mode}")
     except Exception as e:
         print(f"error loading image: {e}")
         return
 
     if in_image.mode == 'RGB':
-        image_array = np.array(in_image, dtype=np.uint8)  # Convert image to numpy array
+        image_array = np.array(in_image, dtype=np.uint8)
         # Invert the channels (index 1)
         image_array[:, :, 0] = 255 - image_array[:, :, 0]
         image_array[:, :, 1] = 255 - image_array[:, :, 1]
@@ -25,11 +25,17 @@ def invert_displacement_map(input_path, output_path):
         # Convert back to PIL image
         converted_image = Image.fromarray(image_array, mode='RGB')
     elif in_image.mode == 'I;16':
-        image_array = np.array(in_image, dtype=np.uint16)  # Convert image to numpy array
+        image_array = np.array(in_image, dtype=np.uint16)
         # Invert the channels (index 1)
         image_array[:, :] = 255 - image_array[:, :]
         # Convert back to PIL image
         converted_image = Image.fromarray(image_array, mode='I;16')
+    elif in_image.mode == 'L':
+        image_array = np.array(in_image, dtype=np.uint8)
+        # Invert the channels (index 1)
+        image_array[:, :] = 255 - image_array[:, :]
+        # Convert back to PIL image
+        converted_image = Image.fromarray(image_array, mode='L')
 
     # Save the converted image
     try:

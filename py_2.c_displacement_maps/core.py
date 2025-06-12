@@ -582,7 +582,8 @@ def generate_vertex_data(vertices, indices):
 class Cube:
     def __init__(self, app, albedo=(1.0, 1.0, 1.0), roughness=0.75, metallic=0.25,
                  position=(0, 0, 0), scale=(0.5, 0.5, 0.5),
-                 texture: str = 'crate_0', bump: str = None, parallax: str = None,
+                 texture: str = 'crate_0', bump: str = None,
+                 parallax: str = None, parallax_scale: float = None,
                  name: str = "cube", can_update=True):
         self.app = app
         self.ctx = app.ctx
@@ -610,6 +611,7 @@ class Cube:
             self.tex_bump_id = -1
         if parallax:
             self.tex_parallax_id = app.texture.get_texture(path=f'../textures/{parallax}.png')
+            self.parallax_scale = parallax_scale
         else:
             self.tex_parallax_id = -1
         self.m_model = self.position
@@ -629,6 +631,7 @@ class Cube:
             self.shader_program['bump_mix'] = 0.0
         if self.tex_parallax_id > -1:
             self.shader_program['parallax_mix'] = 1.0
+            self.shader_program['parallax_scale'] = self.parallax_scale
             self.shader_program['u_tex_parallax'] = self.tex_parallax_id
             self.app.texture.textures[self.tex_parallax_id].use(location=self.tex_parallax_id)
         else:
@@ -734,7 +737,12 @@ class Scene():
         self.objects.append(Cube(app, position=(-_g*2, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7))
         self.objects.append(Cube(app, position=(-_g, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_bump_gl"))
         self.objects.append(Cube(app, position=(0, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_bump_gl",
-                                 parallax="toy_box_disp"))
+                                 parallax="toy_box_disp", parallax_scale=0.15))
+
+        self.objects.append(Cube(app, position=(_g, 0, 0), texture="brick", roughness=0.5, metallic=0.7))
+        self.objects.append(Cube(app, position=(_g*2, 0, 0), texture="brick", roughness=0.6, metallic=0.6, bump="brick_bump2_gl"))
+        self.objects.append(Cube(app, position=(_g*3, 0, 0), texture="brick", roughness=0.6, metallic=0.6, bump="brick_bump2_gl",
+                                 parallax="brick_disp_height", parallax_scale=0.06))
 
         # Debug lights
         self.light_source_global = LightSource(app, light_source=self.app.global_light)

@@ -56,6 +56,7 @@ uniform sampler2DShadow shadow_map_tex;
 
 uniform float bump_mix;
 uniform float parallax_mix;
+uniform float parallax_scale;
 
 const float PI = 3.14159265359;
 const vec3 gamma = vec3(2.2);
@@ -259,23 +260,20 @@ vec3 light_colors(vec3 tex_color, vec3 N) {
 
 void main() {
 
-  // Parallax occlusion
-  const float height_scale = 0.15;
-  const float min_layers = 128.0 * height_scale;
-  const float max_layers = 512.0 * height_scale;
-
   // Get the view vector in tangent space
   const vec3 V = normalize(transpose(bump_t_b_n) * (cam_pos - frag_pos));
-  const float num_layers = mix(max_layers, min_layers, abs(dot(vec3(0.0, 0.0, 1.0), V)));
 
   // Parallax occlusion mapping 
-  const vec2 delta_tc = (V.xy / V.z * height_scale) / num_layers;
+  const float parallax_min_layers = 128.0 * parallax_scale;
+  const float parallax_max_layers = 512.0 * parallax_scale;
+  const float num_layers = mix(parallax_max_layers, parallax_min_layers, abs(dot(vec3(0.0, 0.0, 1.0), V)));
+  const vec2 delta_tc = (V.xy / V.z * parallax_scale) / num_layers;
   const float layer_depth = 1.0 / num_layers;
+
+  // Step through height map
   float current_layer_depth = 0.0;
   vec2 current_tc = uv_0;
   float current_height = texture(u_tex_parallax, uv_0).r;
-
-  // Step through height map
   for (int i = 0; i < int(num_layers); ++i) {
     if (current_layer_depth >= current_height) {
       break;
