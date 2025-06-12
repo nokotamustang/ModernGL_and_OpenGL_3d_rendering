@@ -218,9 +218,11 @@ Reading:
 
 #### py_2.c_displacement_maps - Displacement mapping
 
-Displacement mapping can further apply detail to simple surfaces by moving the texture coordinates and the results are impressive.
+Displacement mapping can apply even more detail compared to just bump mapping. The surfaces can be processing per frag to modify the texture coordinates taking into account the view vector from the camera and the fragment position.
 
 From the guides out there, you can see a progression from parallax displacement, to steep parallax displacement, and then to parallax occlusion displacement. Each advancement makes the result look better.
+
+In modern development more advanced searching is performed to improve the step noise from the linear search used in the classic parallax occlusion displacement method.
 
 ![Screenshots](./screenshots/mgl_disp_1.png)
 ![Screenshots](./screenshots/mgl_disp_2.png)
@@ -239,7 +241,10 @@ python invert_displacement.py --input ../textures/stone_brick_wall_disp.png --ou
 
 Reading:
 
-- ATI pdf from a talk on modern parallax occlusion mapping <https://web.engr.oregonstate.edu/~mjb/cs557/Projects/Papers/Parallax_Occlusion_Mapping.pdf>.
+- ATI pdf from a talk on parallax occlusion mapping <https://web.engr.oregonstate.edu/~mjb/cs557/Projects/Papers/Parallax_Occlusion_Mapping.pdf>.
+- ATI paper on parallax occlusion mapping <https://www.realtimerendering.com/advances/s2006/Chapter5-Parallax_Occlusion_Mapping_for_detailed_surface_rendering.pdf>.
+- Siggraph 2015 on dynamic occlusion with signed distance fields (ray march) <https://www.advances.realtimerendering.com/s2015/DynamicOcclusionWithSignedDistanceFields.pdf>.
+- Shader toy on parallax occlusion mapping: <https://www.shadertoy.com/view/XcdXWj>.
 - Nvidia: <https://developer.nvidia.com/gpugems/gpugems2/part-i-geometric-complexity/chapter-8-pixel-displacement-mapping-distance-functions>.
 - LearnOpenGL: <https://learnopengl.com/Advanced-Lighting/Parallax-Mapping>.
 

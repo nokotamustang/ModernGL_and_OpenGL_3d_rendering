@@ -11,8 +11,8 @@ def convert_dx_to_gl_normal_map(input_path, output_path):
     # Load the PNG image
     try:
         in_image = Image.open(input_path)
-        if in_image.mode != 'RGB':
-            raise ValueError(f"input image must be in RGB format, is: {in_image.mode}")
+        if in_image.mode != 'RGB' and in_image.mode != 'RGBA':
+            raise ValueError(f"input image must be in RGB or RGBA format, is: {in_image.mode}")
     except Exception as e:
         print(f"error loading image: {e}")
         return
@@ -24,7 +24,10 @@ def convert_dx_to_gl_normal_map(input_path, output_path):
     image_array[:, :, 1] = 255 - image_array[:, :, 1]
 
     # Convert back to PIL image
-    converted_image = Image.fromarray(image_array, mode='RGB')
+    if in_image.mode == 'RGB':
+        converted_image = Image.fromarray(image_array, mode='RGB')
+    elif in_image.mode == 'RGBA':
+        converted_image = Image.fromarray(image_array, mode='RGBA')
 
     # Save the converted image
     try:
