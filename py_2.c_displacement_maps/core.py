@@ -737,12 +737,12 @@ class Scene():
         self.objects.append(Cube(app, position=(-_g*2, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7))
         self.objects.append(Cube(app, position=(-_g, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_bump_gl"))
         self.objects.append(Cube(app, position=(0, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_bump_gl",
-                                 parallax="toy_box_disp_depth", parallax_scale=0.15))
+                                 parallax="toy_box_disp_depth_rgb", parallax_scale=0.15))
 
-        self.objects.append(Cube(app, position=(_g, 0, 0), texture="brick", roughness=0.5, metallic=0.7))
-        self.objects.append(Cube(app, position=(_g*2, 0, 0), texture="brick", roughness=0.6, metallic=0.6, bump="brick_bump2_gl"))
-        self.objects.append(Cube(app, position=(_g*3, 0, 0), texture="brick", roughness=0.6, metallic=0.6, bump="brick_bump2_gl",
-                                 parallax="brick_disp_depth", parallax_scale=0.06))
+        self.objects.append(Cube(app, position=(_g, 0, 0), texture="wood", roughness=0.5, metallic=0.7))
+        self.objects.append(Cube(app, position=(_g*2, 0, 0), texture="wood", roughness=0.6, metallic=0.6, bump="wood_bump_gl"))
+        self.objects.append(Cube(app, position=(_g*3, 0, 0), texture="wood", roughness=0.6, metallic=0.6, bump="wood_bump_gl",
+                                 parallax="wood_disp_depth_rgb", parallax_scale=0.05))
 
         # Debug lights
         self.light_source_global = LightSource(app, light_source=self.app.global_light)

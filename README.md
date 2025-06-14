@@ -200,7 +200,7 @@ This is a super handy way of computing the tangent and bi-tangent and ship them 
 A note on normal map formats since there are two different ones: the DirectX and OpenGL formats. In the textures folder I have an example of each in the `brick_bump.dx.png` and `brick_bump.gl.png` images, for example.
 
 ![Screenshots](./screenshots/dx_gl_normals.png)
-_Top of the partition: the DX format for normals, bottom is GL format. You can tell the difference by where the light green hues are. In my opinion the GL format is more intuitive._
+_Top of the partition: the DX format for normals, bottom is GL format. You can tell the difference by where the light green hues are._
 
 In the `/tools/convert_dx_normal.py` script you can convert from DX to GL format with a simple python tool I wrote. It simply inverts the y-component (green channel) of the image.
 
@@ -219,27 +219,41 @@ Reading:
 
 Displacement mapping can apply even more detail compared to just bump mapping. The surfaces can be processing per frag to modify the texture coordinates taking into account the view vector from the camera and the fragment position.
 
+![Screenshots](./screenshots/mgl_disp_1.png)
+![Screenshots](./screenshots/mgl_disp_2.png)
+![Screenshots](./screenshots/mgl_disp_5.png)
+_Top: The left has the flat surface for the toy box, then the bump mapped one, and to the right is with both parallax and bump mapping. Middle: Textures disabled, just illumination. Bottom: At a sharp angle the render of the parallax mapping looks impressive even with a deep displacement._
+
 From the guides out there, you can see a progression from parallax displacement, to steep parallax displacement, and then to parallax occlusion displacement. Each advancement makes the result look better.
 
 In modern development more advanced searching is performed to improve the step noise from the linear search used in the classic parallax occlusion displacement method.
 
-![Screenshots](./screenshots/mgl_disp_1.png)
-![Screenshots](./screenshots/mgl_disp_2.png)
 ![Screenshots](./screenshots/mgl_disp_3.png)
-_Top: At a sharp angle the render of the parallax mapping looks impressive even with a deep displacement. Middle: It combines nicely with the illumination and shadow casting, however not without artifacts and stepping. Bottom: The left has the flat surface, then the bump mapped one, and to the right is with both parallax and bump mapping with textures off and just illumination on._
+![Screenshots](./screenshots/mgl_disp_4.png)
+![Screenshots](./screenshots/mgl_disp_6.png)
+_Top: Raw wood example. Middle: Textures disabled. Bottom: At a sharp angle._
 
-<!-- A note on normal map formats since there are two different ones: the depth and the height ones.
+A note on normal map formats since there are several different ones.
+
+![Screenshots](./screenshots/depth_height.png)
+_Depth displacement shown towards black in the top example. Inverted is showing white as the deep areas. Be careful which you have. You may also have a file created with both depth and height imbedded into the design._
 
 In the `/tools/invert_displacement.py` script you can invert the height component of the image, since some sources will have height as depths and causes more math in the frag.
 
 A usage example from the tools folder is:
+
 ```BAT
 pip install Pillow numpy
-python invert_displacement.py --input ../textures/stone_brick_wall_disp.png --output ../textures/stone_brick_wall_disp.png
-``` -->
+python invert_displacement.py --input ../textures/wood_disp_depth.png --output ../textures/wood_disp_height.png
+```
+
+Note that online is a minefield when it comes to displacement maps. Some will be in RGB, useless since the information is only stored in one 8 bit channel. Some will provide you a 16 bit single channel image, this will probably contain depth and height, with grey midpoint being flat. You will need to adjust your frag accordingly.
+
+I'm sticking with the principles that it is depth information only, where white is equal to the flat surface. this gives a full range contained in an a 8 bit channel.
 
 Reading:
 
+- OpenGL Tutorial with a great write up on parallax occlusion mapping and pit-falls of auto generation of displacement maps <https://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/>.
 - ATI pdf from a talk on parallax occlusion mapping <https://web.engr.oregonstate.edu/~mjb/cs557/Projects/Papers/Parallax_Occlusion_Mapping.pdf>.
 - ATI paper on parallax occlusion mapping <https://www.realtimerendering.com/advances/s2006/Chapter5-Parallax_Occlusion_Mapping_for_detailed_surface_rendering.pdf>.
 - Siggraph 2015 on dynamic occlusion with signed distance fields (ray march) <https://www.advances.realtimerendering.com/s2015/DynamicOcclusionWithSignedDistanceFields.pdf>.

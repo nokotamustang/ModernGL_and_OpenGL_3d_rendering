@@ -723,8 +723,8 @@ class Scene():
         _g = 1.5
         self.objects.append(Cube(app, position=(-_g*2, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7))
         self.objects.append(Cube(app, position=(-_g, 0, 0), texture="toy_box", roughness=0.5, metallic=0.7, bump="toy_box_bump_gl"))
-        self.objects.append(Cube(app, position=(0, 0, 0), texture="brick", roughness=0.6, metallic=0.6))
-        self.objects.append(Cube(app, position=(_g, 0, 0), texture="brick", roughness=0.6, metallic=0.6, bump="brick_bump_gl"))
+        self.objects.append(Cube(app, position=(0, 0, 0), texture="wood", roughness=0.6, metallic=0.6))
+        self.objects.append(Cube(app, position=(_g, 0, 0), texture="wood", roughness=0.6, metallic=0.6, bump="wood_bump_gl"))
 
         # Debug lights
         self.light_source_global = LightSource(app, light_source=self.app.global_light)
