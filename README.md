@@ -1,6 +1,6 @@
 # ModernGL and OpenGL API graphics rendering
 
-_An open exploration of modern 3D rendering in ModernGL and OpenGL._
+_An open exploration of modern 3D rendering in ModernGL and OpenGL - Dr. Charles Mallah._
 
 `👀 Be an early user on my discord for discussions on OpenGL and game development. I'll also be in the ModernGL discord too. - Charlie` <https://discord.gg/Bkhpm8QQ>
 
