@@ -2,7 +2,7 @@
 
 _An open exploration of modern 3D rendering in ModernGL and OpenGL - Dr. Charles Mallah._
 
-`👀 Be an early user on my discord for discussions on OpenGL and game development. I'll also be in the ModernGL discord too. - Charlie` <https://discord.gg/Bkhpm8QQ>
+`👀 Be an early user on my discord for discussions on OpenGL and game development. I'll also be in the ModernGL discord too.` <https://discord.gg/Bkhpm8QQ>
 
 The sections in this readme are divided into demo areas like this:
 
