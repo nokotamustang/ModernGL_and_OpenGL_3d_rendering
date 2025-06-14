@@ -3,8 +3,7 @@ from PIL import Image
 import numpy as np
 import argparse
 
-# Simple command line app to convert DX normal map to GL normal map (inverted y-component)
-# Despite the naming used, this could be used to convert from GL to DX too
+# Simple command line app to remove the A channel from RGBA
 
 modes = {
     1: "1-bit pixels, black and white, stored with one pixel per byte",
@@ -41,23 +40,19 @@ def convert_dx_to_gl_normal_map(input_path, output_path):
             print("no output file, done")
             return
 
-        if in_image.mode != 'RGB' and in_image.mode != 'RGBA':
-            raise ValueError(f"input image must be in RGB or RGBA format, is: {in_image.mode}")
+        if in_image.mode != 'RGBA':
+            raise ValueError(f"input image must be in RGBA format, is: {in_image.mode}")
     except Exception as e:
         print(f"error loading image: {e}")
         return
 
     # Convert image to numpy array
-    image_array = np.array(in_image, dtype=np.uint8)
+    background = Image.new("RGB", in_image.size, (255, 255, 255))
+    background.paste(in_image, mask=in_image.split()[3])  # 3 is the alpha channel
+    image_array = np.array(background, dtype=np.uint8)
 
-    # Invert the green channel (index 1) for DirectX to OpenGL conversion
-    image_array[:, :, 1] = 255 - image_array[:, :, 1]
-
-    # Convert back to PIL image
-    if in_image.mode == 'RGB':
-        converted_image = Image.fromarray(image_array, mode='RGB')
-    elif in_image.mode == 'RGBA':
-        converted_image = Image.fromarray(image_array, mode='RGBA')
+    # Convert back to PIL image without A channel
+    converted_image = Image.fromarray(image_array, mode='RGB')
 
     # Save the converted image
     try:

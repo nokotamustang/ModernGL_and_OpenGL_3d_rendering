@@ -49,21 +49,21 @@ def invert_displacement_map(input_path, output_path):
     if in_image.mode == 'RGB':
         image_array = np.array(in_image, dtype=np.uint8)
         # Invert the channels (index 1)
-        image_array[:, :, 0] = np.uint8 - image_array[:, :, 0]
-        image_array[:, :, 1] = np.uint8 - image_array[:, :, 1]
-        image_array[:, :, 2] = np.uint8 - image_array[:, :, 2]
+        image_array[:, :, 0] = 255 - image_array[:, :, 0]
+        image_array[:, :, 1] = 255 - image_array[:, :, 1]
+        image_array[:, :, 2] = 255 - image_array[:, :, 2]
         # Convert back to PIL image
         converted_image = Image.fromarray(image_array, mode='RGB')
     elif in_image.mode == 'I;16':
         image_array = np.array(in_image, dtype=np.uint16)
         # Invert the channels (index 1)
-        image_array[:, :] = np.uint16 - image_array[:, :]
+        image_array[:, :] = 65535 - image_array[:, :]
         # Convert back to PIL image
         converted_image = Image.fromarray(image_array, mode='I;16')
     elif in_image.mode == 'L':
         image_array = np.array(in_image, dtype=np.uint8)
         # Invert the channels (index 1)
-        image_array[:, :] = np.uint8 - image_array[:, :]
+        image_array[:, :] = 255 - image_array[:, :]
         # Convert back to PIL image
         converted_image = Image.fromarray(image_array, mode='L')
 

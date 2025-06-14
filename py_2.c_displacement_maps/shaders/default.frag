@@ -258,11 +258,7 @@ vec3 light_colors(vec3 tex_color, vec3 N) {
   return Lo * mix(vec3(1.0), tex_color, texture_blend);
 }
 
-void main() {
-
-  // Get the view vector in tangent space
-  const vec3 V = normalize(transpose(bump_t_b_n) * (cam_pos - frag_pos));
-
+vec2 pom_displacement(vec3 V) { 
   // Parallax occlusion mapping 
   const float parallax_min_layers = 128.0 * parallax_scale;
   const float parallax_max_layers = 512.0 * parallax_scale;
@@ -273,22 +269,35 @@ void main() {
   // Step through height map
   float current_layer_depth = 0.0;
   vec2 current_tc = uv_0;
-  float current_height = texture(u_tex_parallax, uv_0).r;
+  float current_height = 1.0 - texture(u_tex_parallax, uv_0).r; 
+  // float current_height = textureGrad(u_tex_parallax, current_tc, dFdx(current_tc), dFdy(current_tc)).r;
   for (int i = 0; i < int(num_layers); ++i) {
     if (current_layer_depth >= current_height) {
       break;
     }
     current_tc -= delta_tc;
-    current_height = texture(u_tex_parallax, current_tc).r;
+    current_height = 1.0 - texture(u_tex_parallax, current_tc).r;
+    // current_height = textureGrad(u_tex_parallax, current_tc, dFdx(current_tc), dFdy(current_tc)).r;
     current_layer_depth += layer_depth;
   }
 
   // Smoothing of the layers with interpolation
   const vec2 prev_tc = current_tc + delta_tc;
   const float after_depth = current_height - current_layer_depth;
-  const float before_depth = texture(u_tex_parallax, prev_tc).r - current_layer_depth + layer_depth;
+  const float before_depth = 1.0 - texture(u_tex_parallax, prev_tc).r - current_layer_depth + layer_depth;
+  // const float before_depth = textureGrad(u_tex_parallax, prev_tc, dFdx(current_tc), dFdy(current_tc)).r - current_layer_depth + layer_depth;
   const float weight = after_depth / (after_depth - before_depth + eps); // Avoid division by zero
-  const vec2 tc = mix(uv_0, mix(current_tc, prev_tc, weight), parallax_mix);
+
+  return mix(uv_0, mix(current_tc, prev_tc, weight), parallax_mix);
+}
+
+void main() {
+
+  // Get the view vector in tangent space
+  const vec3 V = normalize(transpose(bump_t_b_n) * (cam_pos - frag_pos));
+
+  // Parallax occlusion mapping
+  const vec2 tc = pom_displacement(V);
 
   // Bump
   const vec3 bump = texture(u_tex_bump, tc).rgb * 2.0 - 1.0; // Transform from [0..1] to [-1..1] range
@@ -300,9 +309,7 @@ void main() {
   vec3 color = texture(u_tex_albedo, tc).rgb;
 
   // Get rid of the lightly colored rim around raised sections when viewing the surface at an angle:
-  // const vec2 partial_d_x = dFdx(uv_0);
-  // const vec2 partial_d_y = dFdy(uv_0);
-  // vec3 color = textureGrad(u_tex_albedo, tc, partial_d_x, partial_d_y).rgb;
+  // vec3 color = textureGrad(u_tex_albedo, tc, dFdx(uv_0), dFdy(uv_0)).rgb;
 
   // Illumination
   color = pow(color, gamma);
