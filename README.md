@@ -17,11 +17,15 @@ It is accessible to skip to what section you want to read, however It might be b
 
 Python is simple to configure with pip, and the ModernGL library wraps OpenGL in Python.
 
-Since the base module is compiled in C, the python wrapper provided by ModernGL is still fast. A link to the ModernGL documentation: <https://moderngl.readthedocs.io/en/latest/reference/moderngl.html>.
+Since the base module is compiled in C, the python wrapper provided by ModernGL is fast. A link to the ModernGL documentation: <https://moderngl.readthedocs.io/en/latest/reference/moderngl.html>.
 
 Pygame is a set of Python modules designed for video games. It includes graphics and sound libraries designed to be used with the Python. This with ModernGL make a perfect pair of libraries to create 3D graphics and games in Python.
 
-To install do the following:
+Worth noting that you can use `pybind11` or `boost.python` to wrap around c++ code, we will explore this later on:
+- <https://pybind11.readthedocs.io/en/stable/index.html>
+- <https://www.boost.org/doc/libs/1_58_0/libs/python/doc/>
+
+To setup your python environment follow these steps:
 
 1. Download Python: <https://www.python.org/downloads/release/python-3133/> and extract to a directory and add the bin path to your system PATH; I use `c:/python/bin`.
 
