@@ -265,6 +265,21 @@ Reading:
 - Nvidia: <https://developer.nvidia.com/gpugems/gpugems2/part-i-geometric-complexity/chapter-8-pixel-displacement-mapping-distance-functions>.
 - LearnOpenGL: <https://learnopengl.com/Advanced-Lighting/Parallax-Mapping>.
 
+#### py_2.d_better_displacement - Smoother displacement mapping
+
+Adding complexity to the search will give better results. I've tried a variety of ideas in this demo, and have settled it to a cleaned up linear search with several additional steps.
+
+![Screenshots](./screenshots/mgl_better_disp_1.png)
+_Relief mapping smooths the steeper displacement areas very handily._
+
+The method is similar to the linear search but has more areas of work:
+- Including gradient texture sampling for smooth texture reading.
+- Linear search (iteration scale with V as before).
+- Binary search for refinement of the intersection point (4 iterations).
+- Offset limiting to adjust over-displacement.
+- Secant interpolation for smoothness.
+- Contain in height-map bounds.
+
 ### Series 3 - Terrain rendering
 
 Complex data structures to represent the ground, flora, and everything else to make the outdoors scenes.
