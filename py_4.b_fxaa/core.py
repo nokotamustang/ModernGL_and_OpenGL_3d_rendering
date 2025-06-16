@@ -637,7 +637,7 @@ class Scene():
         # Point Lights
         self.app.lights = [self.app.light1, self.app.light2, self.app.light3, self.app.light4]
 
-        # Create a n*n grid of Floor with texture "ground"
+        # Create a n*n grid for the floor
         _n = 10
         _h = -1
         _s = 1

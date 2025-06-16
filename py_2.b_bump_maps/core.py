@@ -640,9 +640,9 @@ class Cube:
 class Floor(Cube):
     def __init__(self, app, albedo=(1.0, 1.0, 1.0), roughness=0.9, metallic=0.2,
                  position=(0, 0, 0), scale=(1, 0.1, 1), texture: str = 'ground',
-                 can_update=False):
+                 bump: str = None, can_update=False):
         super().__init__(app, albedo, roughness, metallic, position,
-                         scale, texture, name="floor", can_update=can_update)
+                         scale, texture, name="floor", bump=bump, can_update=can_update)
 
     def update(self):
         self.m_model = self.position
@@ -711,13 +711,14 @@ class Scene():
         # Point Lights
         self.app.lights = [self.app.light1, self.app.light2, self.app.light3, self.app.light4]
 
-        # Create a n*n grid of Floor with texture "ground"
+        # Create a n*n grid for the floor
         _n = 10
         _h = -1
         _s = 1
         for i in range(-_n, _n):
             for j in range(-_n, _n):
-                self.objects.append(Floor(app, position=(i*_s*2.0, _h, j*_s*2.0), scale=(_s, 0.1, _s)))
+                self.objects.append(Floor(app, position=(i*_s*2.0, _h, j*_s*2.0), scale=(_s, 0.1, _s),
+                                          texture="stone_floor", roughness=0.6, metallic=0.3, bump="stone_floor_bump_gl"))
 
         # Add cubes
         _g = 1.5
