@@ -270,7 +270,7 @@ Reading:
 Adding complexity to the search will give better results. I've tried a variety of ideas in this demo, and have settled it to a cleaned up linear search with several additional steps.
 
 ![Screenshots](./screenshots/mgl_better_disp_1.png)
-_Relief mapping smooths the steeper displacement areas very handily._
+_Improved height intersection search that smooths the steeper displacement areas very handily without too much extra overhead._
 
 The method is similar to the linear search but has more areas of work:
 - Including gradient texture sampling for smooth texture reading.
