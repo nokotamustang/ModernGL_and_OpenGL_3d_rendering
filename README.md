@@ -72,6 +72,39 @@ Geneal controls used:
 - Press `F4` to toggle local light sources.
 - Press `F5` to toggle local texture blend.
 
+### Moderngl window and GPU
+
+Just added a quick one here to test your system and print the limitations of your GPU on the 4.6 OpenGL context with a window, and basic texture registration.
+
+#### py_0.a_gpu_test - Test GPU
+
+It runs and closes, check the terminal output for something like this:
+
+```bat
+gpu and opengl information
+  vendor                            : NVIDIA Corporation
+  renderer                          : NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2
+  opengl version                    : 4.6.0 NVIDIA 576.88
+  shading language version          : 4.60 NVIDIA
+texture-related limits
+  max combined texture units        : 192
+  max texture size                  : 32768x32768 pixels
+  max texture array layers          : 2048
+  max 3d texture size               : 16384x16384x16384
+  max fragment shader texture units : 32
+other system limitations
+  max samples (multi-sampling)      : 32
+  max viewport dimensions           : 32768x32768
+  max uniform buffer bindings       : Unknown
+  max uniform block size            : 65536 bytes
+  max vertex attributes             : 16
+creating a sample texture
+  created texture with ID           : 1
+  texture bound to unit 0
+  texture released
+moderngl context released
+```
+
 ### Series 1 - Simple illumination
 
 Simple illumination models that to start with when learning about 3D and lighting; including shadow-mapping for casting shadows on the scene objects, and multiple light local sources that blend into the scene lighting.
