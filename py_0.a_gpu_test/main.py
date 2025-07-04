@@ -50,7 +50,7 @@ class Engine:
         try:
             self.ctx = moderngl.create_context()
         except Exception as e:
-            print(f"failed to create opengl context: {e}")
+            print(f"error: failed to create opengl context: {e}")
             pygame.quit()
             sys.exit(1)
         self.ctx.enable(flags=moderngl.DEPTH_TEST | moderngl.CULL_FACE | moderngl.BLEND)
@@ -74,9 +74,9 @@ class Engine:
                     shading_version = glGetString(GL_SHADING_LANGUAGE_VERSION).decode('utf-8') if glGetString(GL_SHADING_LANGUAGE_VERSION) else 'Unknown'
                 print(f"  shading language version          : {shading_version}")  # GLSL version
             except Exception as e:
-                print(f"  failed to query shading language version: {e}")
+                print(f"error: failed to query shading language version: {e}")
         except Exception as e:
-            print(f"  failed to query gpu info: {e}")
+            print(f"error: failed to query gpu info: {e}")
 
         # Query texture-related limits
         print("texture-related limits")
@@ -99,7 +99,7 @@ class Engine:
             max_fragment_texture_units = self.ctx.info.get('GL_MAX_TEXTURE_IMAGE_UNITS', 'Unknown')
             print(f"  max fragment shader texture units : {max_fragment_texture_units}")
         except Exception as e:
-            print(f"  failed to query texture-related limits: {e}")
+            print(f"error: failed to query texture-related limits: {e}")
 
         # Query other useful limits for debugging
         print("other system limitations")
@@ -120,13 +120,13 @@ class Engine:
             max_vertex_attribs = self.ctx.info.get('GL_MAX_VERTEX_ATTRIBS', 'Unknown')
             print(f"  max vertex attributes             : {max_vertex_attribs}")
         except Exception as e:
-            print(f"  failed to query other system limits: {e}")
+            print(f"error: failed to query other system limits: {e}")
 
         # Create a sample texture for testing
         print("creating a sample texture")
         try:
             texture = self.ctx.texture(size=(512, 512), components=4, data=None)  # RGBA texture
-            print(f"  created texture with ID           : {texture.glo}")
+            print(f"  created texture with ID {texture.glo}")
             # Bind the texture to a texture unit for testing
             texture.use(location=0)
             print(f"  texture bound to unit 0")
@@ -134,7 +134,7 @@ class Engine:
             texture.release()
             print(f"  texture released")
         except Exception as e:
-            print(f"  failed to create or use texture: {e}")
+            print(f"error: failed to create or use texture: {e}")
 
         # Clean up context and pygame
         self.ctx.release()
