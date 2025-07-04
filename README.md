@@ -99,7 +99,7 @@ other system limitations
   max uniform block size            : 65536 bytes
   max vertex attributes             : 16
 creating a sample texture
-  created texture with ID           : 1
+  created texture with ID 1
   texture bound to unit 0
   texture released
 moderngl context released
