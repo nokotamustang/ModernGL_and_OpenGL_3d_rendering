@@ -81,7 +81,7 @@ Just added a quick one here to test your system and print the limitations of you
 It runs and closes, check the terminal output for something like this:
 
 ```bat
-gpu and opengl information
+gpu
   vendor                            : NVIDIA Corporation
   renderer                          : NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2
   opengl version                    : 4.6.0 NVIDIA 576.88

@@ -62,7 +62,7 @@ class Engine:
 
     def run(self):
         # Query GPU and OpenGL information for debugging
-        print("gpu and opengl information")
+        print("gpu")
         try:
             print(f"  vendor                            : {self.ctx.info.get('GL_VENDOR', 'Unknown')}")  # GPU vendor (e.g., NVIDIA, AMD, Intel)
             print(f"  renderer                          : {self.ctx.info.get('GL_RENDERER', 'Unknown')}")  # GPU model (e.g., GeForce RTX 3080)
