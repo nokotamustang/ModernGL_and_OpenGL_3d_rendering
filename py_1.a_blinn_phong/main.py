@@ -53,8 +53,7 @@ class Engine:
         pygame.display.gl_set_attribute(pygame.GL_CONTEXT_PROFILE_MASK, pygame.GL_CONTEXT_PROFILE_CORE)
         pygame.display.gl_set_attribute(pygame.GL_SWAP_CONTROL, self.vertical_sync)
         # Create OpenGL context for 3D rendering
-        self.game_screen = pygame.display.set_mode(self.win_size, flags=pygame.OPENGL | pygame.DOUBLEBUF,
-                                                   display=self.target_display, vsync=self.vertical_sync)
+        self.game_screen = pygame.display.set_mode(self.win_size, flags=pygame.OPENGL | pygame.DOUBLEBUF, display=self.target_display, vsync=self.vertical_sync)
         # Mouse settings
         pygame.event.set_grab(True)
         pygame.mouse.set_visible(False)
