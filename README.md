@@ -111,14 +111,12 @@ Simple illumination models that to start with when learning about 3D and lightin
 
 A _bidirectional reflectance distribution function_ (BRDF) is a function that defines how light from a source is reflected off an opaque surface. These are written and used in real-time rendering to accomplish semi or full realism but perhaps with some additional trickery or artistry.
 
-A quick note on _Physically Based Rendering_ (PBR) which often gets thrown around interchangeable with BRDF and realtime rendering. I would say that PBR workflows such as from Disney white paper in 2012 focus on realistic rendering, that is not realtime, and more for movie production and other high quality rendering. Get the PDF from Disney here:
-<https://media.disneyanimation.com/uploads/production/publication_asset/48/asset/s2012_pbs_disney_brdf_notes_v3.pdf>
-
-The advantages for the massive time cost that some say is days worth of rendering for a single frame in final production rendering, is that the illumination and shadows can all be modelled in one algorithm.
+A quick note on _Physically Based Rendering_ (PBR) which often gets thrown around interchangeable with BRDF and realtime rendering. I would say that PBR workflows such as from Disney white paper, in 2012, focus on realistic rendering; also the main issue is that it is not realtime, so therefore for movie production and other high quality output. The advantages for the massive time cost that some say is days worth of rendering for a single frame in final production, is that the illumination and shadows can all be modelled in one algorithm. Get the PDF from Disney here:
+<https://media.disneyanimation.com/uploads/production/publication_asset/48/asset/s2012_pbs_disney_brdf_notes_v3.pdf>.
 
 The modern implementations have moved from ray-tracing to a method named path-tracing, so you can dig into that topic as you wish. Usually these methods are bound to CPU solutions, however as graphics hardware has changed we have seen advancements that can push the some algorithms to GPU hardware in the rendering pipeline or via compute shaders.
 
-I focus on BRDF and real time rendering in these materials: we start with Blinn-Phong and then move to Cook-Torrance.
+I focus on BRDF and real time rendering in these materials, which are pf a different nature. We start with Blinn-Phong and then move to Cook-Torrance.
 
 #### py_1.a_blinn-phong - Blinn-Phong
 
